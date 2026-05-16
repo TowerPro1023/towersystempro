@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tower System Pro">
+<meta name="theme-color" content="#1A1A1A">
+<title>Tower System Pro</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#1A1A1A;font-family:Arial,sans-serif;}
+.pg{display:none;flex-direction:column;min-height:100vh;}
+.pg.on{display:flex;}
+.bar{background:#1A1A1A;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+.bar img{height:24px;}
+.bar .tit{color:#F5C800;font-size:13px;font-weight:700;flex:1;text-align:center;}
+.bar .bk{color:#F5C800;font-size:24px;cursor:pointer;padding:0 6px;}
+.bar .dr{color:rgba(255,255,255,0.4);font-size:11px;}
+.bod{flex:1;background:#F0EEE8;padding:14px;overflow-y:auto;}
+.lbl{font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cd{background:white;border-radius:12px;padding:14px;border:2px solid #F5C800;cursor:pointer;position:relative;overflow:hidden;}
+.cd .tp{position:absolute;top:0;left:0;right:0;height:4px;background:#F5C800;}
+.cd .ic{font-size:28px;margin-bottom:8px;}
+.cd .nm{font-size:12px;font-weight:700;color:#1A1A1A;line-height:1.3;}
+.cd .sb{font-size:10px;color:#888;margin-top:3px;}
+.sc{background:#1A1A1A;border-radius:7px;padding:7px 12px;margin:14px 0 8px;display:flex;gap:8px;align-items:center;}
+.sn{color:#F5C800;font-size:11px;font-weight:800;}
+.st{color:white;font-size:9px;font-weight:700;text-transform:uppercase;}
+.fg{margin-bottom:10px;}
+.fl{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;margin-bottom:5px;}
+.fi{width:100%;background:white;border:2px solid #ddd;border-radius:8px;padding:10px 12px;font-size:14px;font-family:Arial;color:#1A1A1A;}
+.fi:focus{border-color:#F5C800;outline:none;}
+textarea.fi{min-height:80px;resize:none;line-height:1.4;}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
+.ckb{background:white;border:2px solid #ddd;border-radius:8px;padding:10px 12px;}
+.ckt{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;margin-bottom:8px;}
+.ckr{display:flex;flex-wrap:wrap;gap:6px;}
+.ch{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:600;border:2px solid #ddd;background:white;cursor:pointer;display:inline-block;}
+.ch.on{background:#1A1A1A;border-color:#1A1A1A;color:#F5C800;}
+.sp{display:flex;align-items:center;background:white;border:2px solid #ddd;border-radius:8px;overflow:hidden;}
+.sb2{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;background:#f0f0f0;border:none;cursor:pointer;flex-shrink:0;color:#1A1A1A;}
+.sv{flex:1;text-align:center;font-size:16px;font-weight:700;color:#1A1A1A;}
+.htb{background:#1A1A1A;border-radius:8px;padding:12px;display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.htl{color:rgba(255,255,255,0.5);font-size:10px;font-weight:700;text-transform:uppercase;}
+.htn{color:rgba(255,255,255,0.3);font-size:10px;margin-top:2px;}
+.htv{color:#F5C800;font-size:20px;font-weight:800;}
+.btn{width:100%;background:#F5C800;color:#1A1A1A;border:none;border-radius:10px;padding:16px;font-size:15px;font-weight:900;cursor:pointer;margin-top:14px;font-family:Arial;}
+.ok{background:#1A1A1A;padding:40px 24px;text-align:center;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ok .ic2{font-size:60px;margin-bottom:16px;}
+.ok h2{color:#F5C800;font-size:22px;font-weight:800;margin-bottom:10px;}
+.ok p{color:rgba(255,255,255,0.5);font-size:13px;line-height:1.6;margin-bottom:6px;}
+.ok .em{color:rgba(255,255,255,0.25);font-size:11px;margin-bottom:30px;}
+.ok button{background:#F5C800;color:#1A1A1A;border:none;border-radius:10px;padding:14px 32px;font-size:15px;font-weight:900;cursor:pointer;font-family:Arial;}
+</style>
+</head>
+<body>
+
+<div class="pg on" id="pH">
+  <div class="bar">
+    <img src="data:image/png;base64,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" alt="Tower System">
+    <span class="dr">Tower System Pro</span>
+  </div>
+  <div class="bod">
+    <div class="lbl">Choisissez un document</div>
+    <div class="gr">
+      <div class="cd" id="c0"><div class="tp"></div><div class="ic">&#128295;</div><div class="nm">Note de regie</div><div class="sb">Travaux executes</div></div>
+      <div class="cd" id="c1"><div class="tp"></div><div class="ic">&#128182;</div><div class="nm">Facture</div><div class="sb">Au client</div></div>
+      <div class="cd" id="c2"><div class="tp"></div><div class="ic">&#128203;</div><div class="nm">Info chantier</div><div class="sb">Demande et info</div></div>
+      <div class="cd" id="c3"><div class="tp"></div><div class="ic">&#127959;</div><div class="nm">Location echafaudage</div><div class="sb">Echafaudage roulant</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="pg" id="pF">
+  <div class="bar">
+    <span class="bk" id="bk">&#8592;</span>
+    <span class="tit" id="ftit"></span>
+    <span style="width:36px"></span>
+  </div>
+  <div class="bod" id="fbod"></div>
+</div>
+
+<div class="pg" id="pO">
+  <div class="ok">
+    <div class="ic2">&#9989;</div>
+    <h2>Envoye!</h2>
+    <p>Votre demande a ete transmise au secretariat.</p>
+    <div class="em">secretariat@towersystem.ch</div>
+    <button id="retour">Retour accueil</button>
+  </div>
+</div>
+
+<script>
+var N={p:2,h:3,v:1,k:10,t:40,ht:4};
+
+function sh(id){
+  document.querySelectorAll('.pg').forEach(function(e){e.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+}
+
+document.getElementById('bk').addEventListener('click',function(){sh('pH');});
+document.getElementById('retour').addEventListener('click',function(){sh('pH');});
+document.getElementById('c0').addEventListener('click',function(){of(0);});
+document.getElementById('c1').addEventListener('click',function(){of(1);});
+document.getElementById('c2').addEventListener('click',function(){of(2);});
+document.getElementById('c3').addEventListener('click',function(){of(3);});
+
+function tc(el){el.classList.toggle('on');}
+function cks(g){var r=[];document.querySelectorAll('[data-g="'+g+'"].on').forEach(function(e){r.push(e.textContent);});return r.length?r.join(', '):'---';}
+function nc(id,d,mn){N[id]=Math.max(mn,parseFloat((N[id]+d).toFixed(1)));document.getElementById('n'+id).textContent=N[id];if(id==='ht'){var e=document.getElementById('htv');if(e)e.textContent=(N[id]+2).toFixed(1)+' m';}}
+function gv(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+function inp(id,lb,ph,tp){return '<div class="fg"><div class="fl">'+lb+'</div><input class="fi" id="'+id+'" type="'+(tp||'text')+'" placeholder="'+ph+'"></div>';}
+function txa(id,lb,ph){return '<div class="fg"><div class="fl">'+lb+'</div><textarea class="fi" id="'+id+'" placeholder="'+ph+'"></textarea></div>';}
+function sec(n,t){return '<div class="sc"><span class="sn">'+n+'.</span><span class="st">'+t+'</span></div>';}
+function ckg(g,lb,items){return '<div class="fg"><div class="ckb"><div class="ckt">'+lb+'</div><div class="ckr">'+items.map(function(i){return '<span class="ch" onclick="tc(this)" data-g="'+g+'">'+i+'</span>';}).join('')+'</div></div></div>';}
+function stp(id,v,s,mn){N[id]=v;return '<div class="sp"><button class="sb2" onclick="nc(''+id+'',-'+s+','+mn+')">-</button><div class="sv" id="n'+id+'">'+v+'</div><button class="sb2" onclick="nc(''+id+'','+s+','+mn+')">+</button></div>';}
+
+function idblk(){
+  return sec(1,'Identification du chantier')+
+    '<div class="r2">'+inp('ch','Chantier','Ex: CHUV Lausanne')+inp('dt','Date','','date')+'</div>'+
+    inp('adr','Adresse','Rue, NPA, Localite')+
+    '<div class="r2">'+inp('cli','Client / Architecte','M. Mme Societe')+inp('tel','Telephone','+41...','tel')+'</div>';
+}
+
+var F=[
+{t:'Note de regie',
+ b:function(){return idblk()+ckg('nat','Nature',['Regie','Complement','Modification'])+sec(2,'Description des travaux')+txa('desc','Description','Decrivez les travaux effectues...')+sec(3,'Temps et Personnel')+'<div class="r2"><div class="fg"><div class="fl">Personnes</div>'+stp('p',2,1,1)+'</div><div class="fg"><div class="fl">Heures</div>'+stp('h',3,0.5,0)+'</div></div><div class="r2">'+inp('hd','Debut','08:00','time')+inp('hf','Fin','17:00','time')+'</div>'+sec(4,'Deplacement')+inp('traj','Trajet','Crissier vers ...')+'<div class="r3"><div class="fg"><div class="fl">Veh.</div>'+stp('v',1,1,0)+'</div><div class="fg"><div class="fl">Km/veh</div>'+stp('k',10,1,0)+'</div><div class="fg"><div class="fl">Min</div>'+stp('t',40,5,0)+'</div></div>'+sec(5,'Remarques')+txa('rem','Remarques','Materiaux, conditions...')+sec(6,'Location materiel')+ckg('lt','Type',['Forfait','Par mois','Par semaine'])+inp('ld','Duree','Ex: 2 mois')+'<button class="btn" id="sbtn">Envoyer au secretariat</button>';},
+ m:function(){return 'NOTE DE REGIE - Tower System
+============================
+Chantier: '+gv('ch')+'
+Date: '+gv('dt')+'
+Adresse: '+gv('adr')+'
+Client: '+gv('cli')+'  Tel: '+gv('tel')+'
+Nature: '+cks('nat')+'
+============================
+TRAVAUX
+'+gv('desc')+'
+============================
+PERSONNEL: '+N.p+' pers. x '+N.h+'h
+Debut: '+gv('hd')+'  Fin: '+gv('hf')+'
+============================
+DEPLACEMENT: '+gv('traj')+'
+'+N.v+' veh. x '+N.k+' km - '+N.t+' min
+============================
+REMARQUES: '+gv('rem')+'
+LOCATION: '+cks('lt')+' - '+gv('ld')+'
+============================
+Tower System Pro';}
+},
+{t:'Facture',
+ b:function(){return idblk()+ckg('nat','Nature',['Facture','Complement','Modification'])+sec(2,'Description des travaux')+txa('desc','Description','Decrivez les travaux...')+sec(3,'Temps et Personnel')+'<div class="r2"><div class="fg"><div class="fl">Personnes</div>'+stp('p',2,1,1)+'</div><div class="fg"><div class="fl">Heures</div>'+stp('h',3,0.5,0)+'</div></div><div class="r2">'+inp('hd','Debut','08:00','time')+inp('hf','Fin','17:00','time')+'</div>'+sec(4,'Deplacement')+inp('traj','Trajet','Crissier vers ...')+'<div class="r3"><div class="fg"><div class="fl">Veh.</div>'+stp('v',1,1,0)+'</div><div class="fg"><div class="fl">Km/veh</div>'+stp('k',10,1,0)+'</div><div class="fg"><div class="fl">Min</div>'+stp('t',40,5,0)+'</div></div>'+sec(5,'Remarques')+txa('rem','Remarques','Materiaux, conditions...')+sec(6,'Location materiel')+ckg('lt','Type',['Forfait','Par mois','Par semaine'])+inp('ld','Duree','Ex: 2 mois')+sec(7,'Facturation')+inp('ref','Reference client','')+'<button class="btn" id="sbtn">Envoyer au secretariat</button>';},
+ m:function(){return 'FACTURE - Tower System
+============================
+Chantier: '+gv('ch')+'
+Date: '+gv('dt')+'
+Adresse: '+gv('adr')+'
+Client: '+gv('cli')+'  Tel: '+gv('tel')+'
+Ref: '+gv('ref')+'
+Nature: '+cks('nat')+'
+============================
+TRAVAUX
+'+gv('desc')+'
+============================
+PERSONNEL: '+N.p+' pers. x '+N.h+'h
+Debut: '+gv('hd')+'  Fin: '+gv('hf')+'
+============================
+DEPLACEMENT: '+gv('traj')+'
+'+N.v+' veh. x '+N.k+' km - '+N.t+' min
+============================
+REMARQUES: '+gv('rem')+'
+LOCATION: '+cks('lt')+' - '+gv('ld')+'
+============================
+Tower System Pro';}
+},
+{t:'Info chantier',
+ b:function(){return idblk()+ckg('nat','Nature',['Location domaine public','Location places de parc','Demande des tiers','Autres'])+sec(2,'Description')+txa('desc','Description','Decrivez les travaux a effectuer...')+sec(3,'Action a entreprendre')+ckg('act','Action',['Facturer','Deviser','Avertir le client'])+txa('ins','Instructions','Ce qu il faut faire...')+'<button class="btn" id="sbtn">Envoyer au secretariat</button>';},
+ m:function(){return 'INFO CHANTIER - Tower System
+============================
+Chantier: '+gv('ch')+'
+Date: '+gv('dt')+'
+Adresse: '+gv('adr')+'
+Client: '+gv('cli')+'  Tel: '+gv('tel')+'
+Nature: '+cks('nat')+'
+============================
+DESCRIPTION
+'+gv('desc')+'
+============================
+ACTION: '+cks('act')+'
+'+gv('ins')+'
+============================
+Tower System Pro';}
+},
+{t:'Location echafaudage roulant',
+ b:function(){return sec(1,'Identification client et chantier')+'<div class="r2">'+inp('cli','Client / Architecte','M. Mme Societe')+inp('tel','Telephone','+41...','tel')+'</div><div class="r2">'+inp('adr','Adresse client','Rue, NPA, Localite')+inp('eml','E-mail','exemple@domaine.ch','email')+'</div><div class="r2">'+inp('liv','Adresse de livraison','Rue, NPA, Localite')+inp('dt','Date souhaitee','','date')+'</div>'+ckg('nat','Nature',['Location','Achat','Prolongation'])+ckg('dur','Duree',['Journee','Semaine','Mois','A convenir'])+sec(2,'Dimensions')+ckg('lrg','Largeur',['75 cm','135 cm'])+ckg('lng','Longueur',['1.50 m','2.00 m','2.50 m','3.00 m'])+'<div class="fg"><div class="fl">Hauteur du plateau (m)</div>'+stp('ht',4,0.5,0)+'<div class="htb"><div><div class="htl">Hauteur de travail</div><div class="htn">Plateau + 2.00 m</div></div><div class="htv" id="htv">6.0 m</div></div></div>'+sec(3,'Remarques')+txa('rem','Remarques','Acces, contraintes...')+'<button class="btn" id="sbtn">Envoyer au secretariat</button>';},
+ m:function(){return 'LOCATION ECHAFAUDAGE - Tower System
+============================
+Client: '+gv('cli')+'  Tel: '+gv('tel')+'
+Adresse: '+gv('adr')+'
+Email: '+gv('eml')+'
+Livraison: '+gv('liv')+'
+Date: '+gv('dt')+'
+Nature: '+cks('nat')+'
+Duree: '+cks('dur')+'
+============================
+DIMENSIONS
+Largeur: '+cks('lrg')+'
+Longueur: '+cks('lng')+'
+Hauteur plateau: '+N.ht+' m
+Hauteur travail: '+(N.ht+2).toFixed(1)+' m
+============================
+REMARQUES
+'+gv('rem')+'
+============================
+Tower System Pro';}
+}
+];
+
+function of(i){
+  N={p:2,h:3,v:1,k:10,t:40,ht:4};
+  window._i=i;
+  document.getElementById('ftit').textContent=F[i].t;
+  document.getElementById('fbod').innerHTML=F[i].b();
+  document.getElementById('sbtn').addEventListener('click',function(){env(i);});
+  var hv=document.getElementById('htv');if(hv)hv.textContent='6.0 m';
+  sh('pF');
+}
+
+function env(i){
+  var btn=document.getElementById('sbtn');
+  btn.disabled=true;btn.textContent='Envoi en cours...';
+  var msg=F[i].m();
+  var subj=F[i].t+' - '+(gv('ch')||gv('cli')||'Tower System');
+  window.location.href='mailto:secretariat@towersystem.ch?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(msg);
+  setTimeout(function(){sh('pO');btn.disabled=false;btn.textContent='Envoyer au secretariat';},2000);
+}
+</script>
+</body>
+</html>
