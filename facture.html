@@ -2,93 +2,81 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-title" content="Tower System Pro">
-<meta name="theme-color" content="#1A1A1A">
-<title>Facture — Tower System Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facture</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{background:#F0EEE8;font-family:Arial,sans-serif;}
-.bar{background:#1A1A1A;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
-.bar a{color:#F5C800;font-size:24px;text-decoration:none;}
-.tit{color:#F5C800;font-size:13px;font-weight:700;flex:1;}
-.bod{padding:14px 14px 60px;}
-.sc{background:#1A1A1A;border-radius:7px;padding:7px 12px;margin:14px 0 8px;display:flex;gap:8px;align-items:center;}
+body{margin:0;font-family:Arial,sans-serif;background:#F0EEE8;}
+.top{background:#1A1A1A;padding:13px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;}
+.top a{color:#F5C800;font-size:26px;text-decoration:none;line-height:1;}
+.top span{color:#F5C800;font-size:13px;font-weight:700;}
+.bod{padding:12px 14px 80px;}
+.sc{background:#1A1A1A;border-radius:7px;padding:7px 12px;margin:14px 0 8px;display:flex;gap:6px;align-items:center;}
 .sn{color:#F5C800;font-size:11px;font-weight:800;}
 .st{color:white;font-size:9px;font-weight:700;text-transform:uppercase;}
 .fg{margin-bottom:10px;}
 .fl{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;margin-bottom:5px;}
-.fi{width:100%;background:white;border:2px solid #ddd;border-radius:8px;padding:10px 12px;font-size:14px;font-family:Arial;color:#1A1A1A;-webkit-appearance:none;}
-.fi:focus{border-color:#F5C800;outline:none;}
-textarea.fi{min-height:80px;resize:none;line-height:1.4;}
+input,textarea{width:100%;background:white;border:2px solid #ddd;border-radius:8px;padding:10px 12px;font-size:15px;font-family:Arial;color:#1A1A1A;-webkit-appearance:none;box-sizing:border-box;}
+input:focus,textarea:focus{border-color:#F5C800;outline:none;}
+textarea{min-height:85px;resize:none;line-height:1.5;}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
 .ckb{background:white;border:2px solid #ddd;border-radius:8px;padding:10px 12px;}
 .ckt{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;margin-bottom:8px;}
 .ckr{display:flex;flex-wrap:wrap;gap:6px;}
-.ch{padding:7px 12px;border-radius:20px;font-size:11px;font-weight:600;border:2px solid #ddd;background:white;cursor:pointer;display:inline-block;}
+.ch{padding:8px 13px;border-radius:20px;font-size:12px;font-weight:600;border:2px solid #ddd;background:white;cursor:pointer;display:inline-block;-webkit-user-select:none;user-select:none;touch-action:manipulation;}
 .ch.on{background:#1A1A1A;border-color:#1A1A1A;color:#F5C800;}
 .sp{display:flex;align-items:center;background:white;border:2px solid #ddd;border-radius:8px;overflow:hidden;}
-.sm{width:44px;height:44px;background:#f0f0f0;border:none;font-size:22px;font-weight:700;cursor:pointer;color:#1A1A1A;}
+.sm{width:48px;height:46px;background:#f0f0f0;border:none;font-size:24px;font-weight:700;cursor:pointer;color:#1A1A1A;touch-action:manipulation;flex-shrink:0;}
 .sv{flex:1;text-align:center;font-size:16px;font-weight:700;color:#1A1A1A;}
-.btn{width:100%;background:#F5C800;color:#1A1A1A;border:none;border-radius:10px;padding:16px;font-size:15px;font-weight:900;cursor:pointer;margin-top:14px;font-family:Arial;}
+.htb{background:#1A1A1A;border-radius:8px;padding:12px;display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.htl{color:rgba(255,255,255,0.5);font-size:10px;font-weight:700;text-transform:uppercase;}
+.htn{color:rgba(255,255,255,0.3);font-size:10px;margin-top:2px;}
+.htv{color:#F5C800;font-size:20px;font-weight:800;}
+.btn{width:100%;background:#F5C800;color:#1A1A1A;border:none;border-radius:10px;padding:17px;font-size:16px;font-weight:900;cursor:pointer;margin-top:16px;font-family:Arial;touch-action:manipulation;display:block;box-sizing:border-box;}
 </style>
 </head>
 <body>
-<div class="bar"><a href="index.html">&#8592;</a><span class="tit">Facture</span></div>
+<div class="top"><a href=+back+>&#8592;</a><span>Facture</span></div>
 <div class="bod">
+
 <div class="sc"><span class="sn">1.</span><span class="st">Identification du chantier</span></div>
-<div class="r2">
-<div class="fg"><div class="fl">Chantier</div><input class="fi" id="ch" type="text" placeholder="Ex: CHUV Lausanne"></div>
-<div class="fg"><div class="fl">Date</div><input class="fi" id="dt" type="date"></div>
-</div>
-<div class="fg"><div class="fl">Adresse</div><input class="fi" id="adr" type="text" placeholder="Rue, NPA, Localite"></div>
-<div class="r2">
-<div class="fg"><div class="fl">Client / Architecte</div><input class="fi" id="cli" type="text" placeholder="M. Mme Societe"></div>
-<div class="fg"><div class="fl">Telephone</div><input class="fi" id="tel" type="tel" placeholder="+41..."></div>
-</div>
-<div class="fg"><div class="ckb"><div class="ckt">Nature</div><div class="ckr">
-<span class="ch" onclick="this.classList.toggle('on')" data-g="nat">Regie</span>
-<span class="ch" onclick="this.classList.toggle('on')" data-g="nat">Complement</span>
-<span class="ch" onclick="this.classList.toggle('on')" data-g="nat">Modification</span>
-</div></div></div>
+<div class="r2"><div class="fg"><div class="fl">Chantier</div><input id="ch" type="text" placeholder="Ex: CHUV Lausanne"></div><div class="fg"><div class="fl">Date</div><input id="dt" type="date"></div></div>
+<div class="fg"><div class="fl">Adresse</div><input id="adr" type="text" placeholder="Rue, NPA, Localite"></div>
+<div class="r2"><div class="fg"><div class="fl">Client / Architecte</div><input id="cli" type="text" placeholder="M. Mme Societe"></div><div class="fg"><div class="fl">Telephone</div><input id="tel" type="tel" placeholder="+41..."></div></div>
+<div class="fg"><div class="ckb"><div class="ckt">Nature de la demande</div><div class="ckr"><span class="ch" onclick="tc(this)" data-g="nat">Regie</span><span class="ch" onclick="tc(this)" data-g="nat">Complement</span><span class="ch" onclick="tc(this)" data-g="nat">Modification</span></div></div></div>
 <div class="sc"><span class="sn">2.</span><span class="st">Description des travaux</span></div>
-<div class="fg"><div class="fl">Description</div><textarea class="fi" id="desc" placeholder="Decrivez les travaux effectues..."></textarea></div>
+<div class="fg"><div class="fl">Description</div><textarea id="desc" placeholder="Decrivez les travaux effectues..."></textarea></div>
 <div class="sc"><span class="sn">3.</span><span class="st">Temps et Personnel</span></div>
-<div class="r2">
-<div class="fg"><div class="fl">Personnes</div><div class="sp"><button class="sm" onclick="ch('p',-1,1)">-</button><div class="sv" id="np">2</div><button class="sm" onclick="ch('p',1,1)">+</button></div></div>
-<div class="fg"><div class="fl">Heures</div><div class="sp"><button class="sm" onclick="ch('h',-0.5,0)">-</button><div class="sv" id="nh">3</div><button class="sm" onclick="ch('h',0.5,0)">+</button></div></div>
-</div>
-<div class="r2">
-<div class="fg"><div class="fl">Debut</div><input class="fi" id="hd" type="time" value="08:00"></div>
-<div class="fg"><div class="fl">Fin</div><input class="fi" id="hf" type="time" value="17:00"></div>
-</div>
+<div class="r2"><div class="fg"><div class="fl">Personnes</div><div class="sp"><button class="sm" onclick="ch('p',-1,1)">-</button><div class="sv" id="np">2</div><button class="sm" onclick="ch('p',1,1)">+</button></div></div><div class="fg"><div class="fl">Heures</div><div class="sp"><button class="sm" onclick="ch('h',-0.5,0)">-</button><div class="sv" id="nh">3</div><button class="sm" onclick="ch('h',0.5,0)">+</button></div></div></div>
+<div class="r2"><div class="fg"><div class="fl">Debut</div><input id="hd" type="time" value="08:00"></div><div class="fg"><div class="fl">Fin</div><input id="hf" type="time" value="17:00"></div></div>
 <div class="sc"><span class="sn">4.</span><span class="st">Deplacement</span></div>
-<div class="fg"><div class="fl">Trajet</div><input class="fi" id="traj" type="text" placeholder="Crissier vers ..."></div>
-<div class="r3">
-<div class="fg"><div class="fl">Vehicules</div><div class="sp"><button class="sm" onclick="ch('v',-1,0)">-</button><div class="sv" id="nv">1</div><button class="sm" onclick="ch('v',1,0)">+</button></div></div>
-<div class="fg"><div class="fl">Km/veh</div><div class="sp"><button class="sm" onclick="ch('k',-1,0)">-</button><div class="sv" id="nk">10</div><button class="sm" onclick="ch('k',1,0)">+</button></div></div>
-<div class="fg"><div class="fl">Min</div><div class="sp"><button class="sm" onclick="ch('t',-5,0)">-</button><div class="sv" id="nt">40</div><button class="sm" onclick="ch('t',5,0)">+</button></div></div>
-</div>
+<div class="fg"><div class="fl">Trajet</div><input id="traj" type="text" placeholder="Crissier vers ..."></div>
+<div class="r3"><div class="fg"><div class="fl">Vehicules</div><div class="sp"><button class="sm" onclick="ch('v',-1,0)">-</button><div class="sv" id="nv">1</div><button class="sm" onclick="ch('v',1,0)">+</button></div></div><div class="fg"><div class="fl">Km/veh</div><div class="sp"><button class="sm" onclick="ch('k',-1,0)">-</button><div class="sv" id="nk">10</div><button class="sm" onclick="ch('k',1,0)">+</button></div></div><div class="fg"><div class="fl">Min</div><div class="sp"><button class="sm" onclick="ch('t',-5,0)">-</button><div class="sv" id="nt">40</div><button class="sm" onclick="ch('t',5,0)">+</button></div></div></div>
 <div class="sc"><span class="sn">5.</span><span class="st">Remarques</span></div>
-<div class="fg"><div class="fl">Remarques</div><textarea class="fi" id="rem" placeholder="Materiaux, conditions..."></textarea></div>
+<div class="fg"><div class="fl">Remarques</div><textarea id="rem" placeholder="Materiaux, conditions..."></textarea></div>
 <div class="sc"><span class="sn">6.</span><span class="st">Location materiel</span></div>
-<div class="fg"><div class="ckb"><div class="ckt">Type de location</div><div class="ckr">
-<span class="ch" onclick="this.classList.toggle('on')" data-g="lt">Forfait</span>
-<span class="ch" onclick="this.classList.toggle('on')" data-g="lt">Par mois</span>
-<span class="ch" onclick="this.classList.toggle('on')" data-g="lt">Par semaine</span>
-</div></div></div>
-<div class="fg"><div class="fl">Duree</div><input class="fi" id="ld" type="text" placeholder="Ex: 2 mois"></div>
+<div class="fg"><div class="ckb"><div class="ckt">Type de location</div><div class="ckr"><span class="ch" onclick="tc(this)" data-g="lt">Forfait</span><span class="ch" onclick="tc(this)" data-g="lt">Par mois</span><span class="ch" onclick="tc(this)" data-g="lt">Par semaine</span></div></div></div>
+<div class="fg"><div class="fl">Duree</div><input id="ld" type="text" placeholder="Ex: 2 mois"></div>
+<div class="sc"><span class="sn">7.</span><span class="st">Facturation</span></div>
+<div class="fg"><div class="fl">Reference client</div><input id="ref" type="text" placeholder=""></div>
 <button class="btn" onclick="env()">Envoyer au secretariat</button>
 </div>
 <script>
-var N={p:2,h:3,v:1,k:10,t:40};
-function ch(id,d,mn){N[id]=Math.max(mn,parseFloat((N[id]+d).toFixed(1)));document.getElementById('n'+id).textContent=N[id];}
+
+var N={p:2,h:3,v:1,k:10,t:40,ht:4};
+function ch(id,d,mn){N[id]=Math.max(mn,parseFloat((N[id]+d).toFixed(1)));var e=document.getElementById('n'+id);if(e)e.textContent=N[id];if(id==='ht'){var h=document.getElementById('htv');if(h)h.textContent=(N[id]+2).toFixed(1)+' m';}}
+function tc(el){el.classList.toggle('on');}
 function cks(g){var r=[];document.querySelectorAll('[data-g="'+g+'"].on').forEach(function(e){r.push(e.textContent);});return r.length?r.join(', '):'---';}
 function gv(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+function idblk(){return 'Chantier: '+gv('ch')+'\nDate: '+gv('dt')+'\nAdresse: '+gv('adr')+'\nClient: '+gv('cli')+'  Tel: '+gv('tel');}
+function deplblk(){return 'Trajet: '+gv('traj')+'\n'+N.v+' veh. x '+N.k+' km - '+N.t+' min';}
+
 function env(){
-  var msg='FACTURE - Tower System\n============================\nChantier: '+gv('ch')+'\nDate: '+gv('dt')+'\nAdresse: '+gv('adr')+'\nClient: '+gv('cli')+'  Tel: '+gv('tel')+'\nNature: '+cks('nat')+'\n============================\nTRAVAUX\n'+gv('desc')+'\n============================\nPERSONNEL: '+N.p+' pers. x '+N.h+'h\nDebut: '+gv('hd')+'  Fin: '+gv('hf')+'\n============================\nDEPLACEMENT: '+gv('traj')+'\n'+N.v+' veh. x '+N.k+' km - '+N.t+' min\n============================\nREMARQUES: '+gv('rem')+'\nLOCATION: '+cks('lt')+' - '+gv('ld')+'\n============================\nTower System Pro';
-  window.location.href='mailto:secretariat@towersystem.ch?subject='+encodeURIComponent('Facture - '+(gv('ch')||'Tower System'))+'&body='+encodeURIComponent(msg);
+  var msg='FACTURE - Tower System\n============================\n'+idblk()+'\nRef: '+gv('ref')+'\nNature: '+cks('nat')+'\n============================\nTRAVAUX\n'+gv('desc')+'\n============================\nPERSONNEL: '+N.p+' pers. x '+N.h+'h\nDebut: '+gv('hd')+'  Fin: '+gv('hf')+'\n============================\n'+deplblk()+'\n============================\nREMARQUES: '+gv('rem')+'\nLOCATION: '+cks('lt')+' - '+gv('ld')+'\n============================\nTower System Pro';
+  var s='Facture - '+(gv('ch')||'Tower System');
+  document.querySelector('.btn').textContent='Envoi...';
+  window.location.href='mailto:secretariat@towersystem.ch?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(msg);
+  setTimeout(function(){document.querySelector('.btn').textContent='Envoyer au secretariat';},3000);
 }
 </script>
 </body>
